@@ -14,12 +14,11 @@ import org.bukkit.event.world.PortalCreateEvent;
 
 
 public class EssentialsProtectBlockListener implements Listener {
+
     final private IProtect prot;
-    final private IEssentials ess;
 
     public EssentialsProtectBlockListener(final IProtect parent) {
         this.prot = parent;
-        this.ess = prot.getEssentialsConnect().getEssentials();
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
@@ -54,7 +53,7 @@ public class EssentialsProtectBlockListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-    public void onBlockFromTo(final BlockFromToEvent event) {
+    public void onBlockFromTo(BlockFromToEvent event) {
         final Block block = event.getBlock();
 
         if (block.getType() == Material.WATER || block.getType() == Material.STATIONARY_WATER) {
@@ -73,7 +72,7 @@ public class EssentialsProtectBlockListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-    public void onBlockBurn(final BlockBurnEvent event) {
+    public void onBlockBurn(BlockBurnEvent event) {
         if (prot.getSettingBool(ProtectConfig.prevent_fire_spread)) {
             event.setCancelled(true);
         }
