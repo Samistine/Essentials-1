@@ -237,11 +237,13 @@ public class EssentialsPlayerListener implements Listener {
                     }
                 }
 
-                if (user.isAuthorized("essentials.sleepingignored")) {
+                //This feature isn't utilized on our network
+                /*if (user.isAuthorized("essentials.sleepingignored")) {
                     user.getBase().setSleepingIgnored(true);
-                }
+                }*/
 
-                if (ess.getSettings().allowSilentJoinQuit() && (user.isAuthorized("essentials.silentjoin") || user.isAuthorized("essentials.silentjoin.vanish"))) {
+                //Commenting this out since join messages are disabled on our network
+                /*if (ess.getSettings().allowSilentJoinQuit() && (user.isAuthorized("essentials.silentjoin") || user.isAuthorized("essentials.silentjoin.vanish"))) {
                     if (user.isAuthorized("essentials.silentjoin.vanish")) {
                         user.setVanished(true);
                     }
@@ -252,15 +254,17 @@ public class EssentialsPlayerListener implements Listener {
                     ess.getServer().broadcastMessage(msg);
                 } else if (ess.getSettings().allowSilentJoinQuit()) {
                     ess.getServer().broadcastMessage(message);
-                }
+                }*/
 
-                if (input != null && user.isAuthorized("essentials.motd")) {
+                //No perms check for motd needed
+                if (input != null /*&& user.isAuthorized("essentials.motd")*/) {
                     final IText output = new KeywordReplacer(input, user.getSource(), ess);
                     final TextPager pager = new TextPager(output, true);
                     pager.showPage("1", null, "motd", user.getSource());
                 }
 
-                if (!ess.getSettings().isCommandDisabled("mail") && user.isAuthorized("essentials.mail")) {
+                //No perms check for mail needed
+                if (!ess.getSettings().isCommandDisabled("mail") /*&& user.isAuthorized("essentials.mail")*/) {
                     final List<String> mail = user.getMails();
                     if (mail.isEmpty()) {
                         if (ess.getSettings().isNotifyNoNewMail()) {
@@ -271,7 +275,8 @@ public class EssentialsPlayerListener implements Listener {
                     }
                 }
 
-                if (user.isAuthorized("essentials.fly.safelogin")) {
+                //This feature isn't utilized on our network
+                /*if (user.isAuthorized("essentials.fly.safelogin")) {
                     user.getBase().setFallDistance(0);
                     if (LocationUtil.shouldFly(user.getLocation())) {
                         user.getBase().setAllowFlight(true);
@@ -280,12 +285,13 @@ public class EssentialsPlayerListener implements Listener {
                             user.getBase().sendMessage(tl("flyMode", tl("enabled"), user.getDisplayName()));
                         }
                     }
-                }
+                }*/
 
-                if (!user.isAuthorized("essentials.speed")) {
+                //Set everyones speed to the default on join
+                //if (!user.isAuthorized("essentials.speed")) {
                     user.getBase().setFlySpeed(0.1f);
                     user.getBase().setWalkSpeed(0.2f);
-                }
+                //}
 
                 if (user.isSocialSpyEnabled() && !user.isAuthorized("essentials.socialspy")) {
                     user.setSocialSpyEnabled(false);
